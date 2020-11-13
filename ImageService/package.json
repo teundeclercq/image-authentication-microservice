@@ -1,0 +1,22 @@
+{
+  "name": "ImageService",
+  "version": "0.0.1",
+  "description": "Image server for YoutubeImgurBackend",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/teundeclercq/YoutubeImgurBackend.git"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "sequelize": "^6.3.5"
+  }
+}

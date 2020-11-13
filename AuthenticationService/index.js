@@ -12,6 +12,7 @@ app.use(express.json());
 //Route middlewares
 app.use('/api/user', authRoute);
 app.use('/api/posts', postRoute);
+
 sequelize.sync().then(res => {
     console.log(res);
     app.listen(3000);
