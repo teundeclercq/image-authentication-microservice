@@ -16,14 +16,14 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-  steps:
-    - uses: actions/checkout@v2
-    - name: Kuberentes (k8s) cli - kubectl
-      uses: actions-hub/kubectl@master
+    
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions-hub/kubectl@master
         env:
-          KUBE_CONFIG: ${{secrets.KUBE_CONFIG}}
+          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
         with:
-          args: get nodes
+          args: get pods
 
 
 #  # This workflow contains a single job called "build"
