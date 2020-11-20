@@ -49,8 +49,8 @@ jobs:
       - name: Run Buildx authserver (push image)
         if: success()
         run: |
-            docker buildx build --platform linux/arm/v7 --tag docker.pkg.github.com/teundeclercq/youtubeimgurbackend/authserver:0.0.2 --file ./AuthenticationService/Dockerfile --output "type=image,push=false" .
-            docker push docker.pkg.github.com/teundeclercq/youtubeimgurbackend/authserver:0.0.2
+            docker buildx build --platform linux/arm/v7 --tag authserver:0.0.2 --file ./AuthenticationService/Dockerfile --output "type=image,push=false" .
+            
 
       - name: Run Buildx imageserver (push image)
         if: success()
