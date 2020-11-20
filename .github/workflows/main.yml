@@ -28,34 +28,29 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Set up Docker Buildx
-        uses: crazy-max/ghaction-docker-buildx@v1
+        uses: docker/setup-buildx-action@v1
+        id: buildx
         with:
-          buildx-version: latest
-
-      - name: Prepare
-        if: success()
-        id: prepare
-        run: |
-            echo ::set-output name=docker_platform::${DOCKER_TARGET_PLATFORM}
-            echo ::set-output name=docker_image_authserver::${DOCKER_REGISTRY}/${DOCKER_USER}/${DOCKER_IMAGE_AUTHSERVER}
-            echo ::set-output name=docker_image_imageserver::${DOCKER_REGISTRY}/${DOCKER_USER}/${DOCKER_IMAGE_IMAGESERVER}
-            echo ::set-output name=version::${GITHUB_RUN_NUMBER}
+          install: true
 
       - name: docker login
         run: |
           echo ${{secrets.GITHUB_TOKEN}} | docker login docker.pkg.github.com -u teundeclercq --password-stdin
 
-
-      - name: Run Buildx authserver (push image)
-        if: success()
+      - name: Build
         run: |
-            docker buildx build --platform linux/arm/v7 --tag authserver:0.0.2 --file ./AuthenticationService/Dockerfile --output "type=image,push=false" .
-            
+          docker build ./AuthenticateService -t docker.pkg.github.com/teundeclercq/youtubeimgurbackend/authserver:0.0.2
 
-      - name: Run Buildx imageserver (push image)
-        if: success()
-        run: |
-          docker buildx build --platform linux/arm/v7 --tag docker.pkg.github.com/teundeclercq/youtubeimgurbackend/imageserver:0.0.2 --file ./ImageService/Dockerfile --output "type=image,push=false" .
+#      - name: Run Buildx authserver (push image)
+#        if: success()
+#        run: |
+#            docker buildx build --platform linux/arm/v7 --tag authserver:0.0.2 --file ./AuthenticationService/Dockerfile --output "type=image,push=false" .
+#
+#
+#      - name: Run Buildx imageserver (push image)
+#        if: success()
+#        run: |
+#          docker buildx build --platform linux/arm/v7 --tag docker.pkg.github.com/teundeclercq/youtubeimgurbackend/imageserver:0.0.2 --file ./ImageService/Dockerfile --output "type=image,push=false" .
 
 
 
