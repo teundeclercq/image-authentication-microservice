@@ -1,8 +1,10 @@
 const express = require('express');
 const app = express();
+
 //import routes
 const authRoute = require('./routes/auth');
 const postRoute = require('./routes/posts');
+
 //Connect to the db
 const sequelize = require('./util/database');
 
