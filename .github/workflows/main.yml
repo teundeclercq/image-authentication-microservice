@@ -17,25 +17,65 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     runs-on: ubuntu-latest
-
+    env:
+      DOCKER_REGISTRY: docker.pkg.github.com
+      DOCKER_USER: teundeclercq
+      DOCKER_IMAGE_AUTHSERVER: youtubeimgurbackend/authserver:0.0.2
+      DOCKER_IMAGE_IMAGESERVER: youtubeimgurbackend/imageserver:0.0.2
+      DOCKER_TARGET_PLATFORM: linux/arm/v7
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout the code
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: crazy-max/ghaction-docker-buildx@v3
+        width:
+          buildx-version: latest
+
+      - name: Prepare
+          if: success()
+          id: prepare
+          run: |
+            echo ::set-output name=docker_platform::${DOCKER_TARGET_PLATFORM}
+            echo ::set-output name=docker_image_authserver::${DOCKER_REGISTRY}/${DOCKER_USER}/${DOCKER_IMAGE_AUTHSERVER}
+            echo ::set-output name=docker_image_imageserver::${DOCKER_REGISTRY}/${DOCKER_USER}/${DOCKER_IMAGE_IMAGESERVER}
+            echo ::set-output name=version::${GITHUB_RUN_NUMBER}
+
       - name: docker login
         run: |
           echo ${{secrets.GITHUB_TOKEN}} | docker login docker.pkg.github.com -u teundeclercq --password-stdin
 
-      - name: docker build AuthServer
-        run: |
-          docker build ./AuthenticationService -t docker.pkg.github.com/teundeclercq/youtubeimgurbackend/authserver:0.0.2
 
-      - name: docker build ImageServer
-        run: |
-          docker build ./ImageService -t docker.pkg.github.com/teundeclercq/youtubeimgurbackend/imageserver:0.0.2
+      - name: Run Buildx authserver (push image)
+          if: success()
+          run: |
+            docker buildx build \
+            --platform ${{ steps.prepare.outputs.docker_platform }} \
+            --tag ${{ steps.prepare.outputs.docker_image_authserver }}:${{ steps.prepare.outputs.version }} \
+            --file ./AuthenticationService/Dockerfile \
+            --output type=image,push=true .
 
-      - name: docker push
-        run: |
-          docker push docker.pkg.github.com/teundeclercq/youtubeimgurbackend/authserver:0.0.2
-          docker push docker.pkg.github.com/teundeclercq/youtubeimgurbackend/imageserver:0.0.2
+      - name: Run Buildx imageserver (push image)
+          if: success()
+          run: |
+            docker buildx build \
+            --platform ${{ steps.prepare.outputs.docker_platform }} \
+            --tag ${{ steps.prepare.outputs.docker_image_imageserver }}:${{ steps.prepare.outputs.version }} \
+            --file ./ImageService/Dockerfile \
+            --output type=image,push=true .
+
+#      - name: docker build AuthServer
+#        run: |
+#          docker build ./AuthenticationService -t docker.pkg.github.com/teundeclercq/youtubeimgurbackend/authserver:0.0.2
+#
+#      - name: docker build ImageServer
+#        run: |
+#          docker build ./ImageService -t docker.pkg.github.com/teundeclercq/youtubeimgurbackend/imageserver:0.0.2
+#
+#      - name: docker push
+#        run: |
+#          docker push docker.pkg.github.com/teundeclercq/youtubeimgurbackend/authserver:0.0.2
+#          docker push docker.pkg.github.com/teundeclercq/youtubeimgurbackend/imageserver:0.0.2
 
 
 #  deploy:
