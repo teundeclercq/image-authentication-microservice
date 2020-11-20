@@ -28,7 +28,7 @@ jobs:
       # Runs a single command using the runners shell
       - name: docker build AuthServer
         run: |
-          docker build /AuthenticationService -t youtubeimgurbackend/authserver:0.0.1
+          docker build YoutubeImgurBackend/AuthenticationService -t youtubeimgurbackend/authserver:0.0.1
 
       - name: docker build ImageServer
         run: |
