@@ -16,7 +16,7 @@ app.use(express.json());
 app.use('/api/images', multer({storage: memoryStorage()}).single('file') ,imageRoutes);
 
 
-sequelize.sync({force: true}).then(res => {
+sequelize.sync().then(res => {
     console.log(res);
     app.listen(3000);
 }).catch(err => {

@@ -4,7 +4,7 @@
   "description": "Authentication server for YoutubeImgurBackend",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "startServer": "nodemon index.js"
   },
   "repository": {
     "type": "git",

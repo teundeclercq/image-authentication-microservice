@@ -17,7 +17,7 @@ app.use('/api/posts', postRoute);
 
 sequelize.sync().then(res => {
     console.log(res);
-    app.listen(3000);
+    app.listen(3001);
 }).catch(err => {
     console.log(err);
 });

@@ -41,6 +41,10 @@ router.post('/login', async (req, res) => {
     res.header('auth-token', token).send(token);
 });
 
+router.get('/verify', async (req, res) => {
+
+});
+
 
 
 
