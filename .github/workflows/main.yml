@@ -39,7 +39,7 @@ jobs:
 
       - name: Build
         run: |
-          docker build ./AuthenticateService -t docker.pkg.github.com/teundeclercq/youtubeimgurbackend/authserver:0.0.2
+          docker build ./AuthenticationService -t docker.pkg.github.com/teundeclercq/youtubeimgurbackend/authserver:0.0.2
 
 #      - name: Run Buildx authserver (push image)
 #        if: success()
