@@ -13,34 +13,25 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       - name: docker login
-        env: 
-          DOCKER_USER: ${{ secrets.DOCKER_USER }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: |
-          docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+          docker login docker.pkg.github.com -u teundeclercq --pasword-stdin
 
-      # Runs a single command using the runners shell
       - name: docker build AuthServer
         run: |
-          docker build ./AuthenticationService -t teundeclercq/tdcrepo:youtubeimgurbackend_authserver-0.0.1
+          docker build ./AuthenticationService -t docker.pkg.github.com/youtubeimgurbackend/authserver:0.0.1 
 
       - name: docker build ImageServer
         run: |
-          docker build ./ImageService -t teundeclercq/tdcrepo:youtubeimgurbackend_imageserver-0.0.1
+          docker build ./ImageService -t docker.pkg.github.com/youtubeimgurbackend/imageserver:0.0.1
           
       - name: docker push
         run: |
-          docker push teundeclercq/tdcrepo:youtubeimgurbackend_authserver-0.0.1
-          docker push teundeclercq/tdcrepo:youtubeimgurbackend_imageserver-0.0.1
+          docker push docker.pkg.github.com/youtubeimgurbackend/authserver:0.0.1
+          docker push docker.pkg.github.com/youtubeimgurbackend/imageserver:0.0.1
