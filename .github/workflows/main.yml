@@ -50,19 +50,20 @@ jobs:
         if: success()
         run: |
             docker buildx build \
-            --platform ${{ steps.prepare.outputs.docker_platform }} \
-            --tag ${{ steps.prepare.outputs.docker_image_authserver }}:${{ steps.prepare.outputs.version }} \
-            --file ./AuthenticationService/Dockerfile \
-            --output type=image,push=true .
+                      --platform linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/ppc64le,linux/s390x \
+                      --tag ${{ steps.prepare.outputs.docker_image_authserver }}:${{ steps.prepare.outputs.version }} \
+                      --file ./AuthenticationService/Dockerfile \
+                      --output "type=image,push=true" .
+
 
       - name: Run Buildx imageserver (push image)
         if: success()
         run: |
-            docker buildx build \
-            --platform ${{ steps.prepare.outputs.docker_platform }} \
-            --tag ${{ steps.prepare.outputs.docker_image_imageserver }}:${{ steps.prepare.outputs.version }} \
-            --file ./ImageService/Dockerfile \
-            --output type=image,push=true .
+          docker buildx build \
+                                --platform linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/ppc64le,linux/s390x \
+                                --tag ${{ steps.prepare.outputs.docker_image_authserver }}:${{ steps.prepare.outputs.version }} \
+                                --file ./ImageService/Dockerfile \
+                                --output "type=image,push=true" .
 
 #      - name: docker build AuthServer
 #        run: |
