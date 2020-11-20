@@ -54,17 +54,17 @@ jobs:
                       --tag ${{ steps.prepare.outputs.docker_image_authserver }}:${{ steps.prepare.outputs.version }} \
                       --file ./AuthenticationService/Dockerfile \
                       --output "type=image,push=false" .
-
+            docker push ${{ steps.prepare.outputs.docker_image_authserver }}:${{ steps.prepare.outputs.version }}
 
       - name: Run Buildx imageserver (push image)
         if: success()
         run: |
           docker buildx build \
                                 --platform linux/arm/v7 \
-                                --tag ${{ steps.prepare.outputs.docker_image_authserver }}:${{ steps.prepare.outputs.version }} \
+                                --tag ${{ steps.prepare.outputs.docker_image_imageserver }}:${{ steps.prepare.outputs.version }} \
                                 --file ./ImageService/Dockerfile \
                                 --output "type=image,push=false" .
-
+          docker push ${{ steps.prepare.outputs.docker_image_imageserver }}:${{ steps.prepare.outputs.version }}
 
 
 #      - name: docker build AuthServer
@@ -75,10 +75,8 @@ jobs:
 #        run: |
 #          docker build ./ImageService -t docker.pkg.github.com/teundeclercq/youtubeimgurbackend/imageserver:0.0.2
 #
-      - name: docker push
-        run: |
-          docker push ${DOCKER_REGISTRY}/${DOCKER_USER}/${DOCKER_IMAGE_AUTHSERVER}:${DOCKER_RUN_NUMBER}
-          docker push ${DOCKER_REGISTRY}/${DOCKER_USER}/${DOCKER_IMAGE_IMAGESERVER}:${DOCKER_RUN_NUMBER}
+  
+
 
 
 #  deploy:
