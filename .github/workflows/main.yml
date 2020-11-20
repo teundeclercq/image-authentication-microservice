@@ -42,5 +42,5 @@ jobs:
           
       - name: docker push
         run: |
-          docker push youtubeimgurbackend/authserver:0.0.1
-          docker push youtubeimgurbackend/imageserver:0.0.1
+          docker push teundeclercq/tdcrepo:youtubeimgurbackend/authserver:0.0.1
+          docker push teundeclercq/tdcrepo:youtubeimgurbackend/imageserver:0.0.1
