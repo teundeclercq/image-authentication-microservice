@@ -20,8 +20,8 @@ jobs:
     env:
       DOCKER_REGISTRY: docker.pkg.github.com
       DOCKER_USER: teundeclercq
-      DOCKER_IMAGE_AUTHSERVER: youtubeimgurbackend/authserver:0.0.2
-      DOCKER_IMAGE_IMAGESERVER: youtubeimgurbackend/imageserver:0.0.2
+      DOCKER_IMAGE_AUTHSERVER: youtubeimgurbackend/authserver
+      DOCKER_IMAGE_IMAGESERVER: youtubeimgurbackend/imageserver
       DOCKER_TARGET_PLATFORM: linux/arm/v7
     steps:
       - name: Checkout the code
