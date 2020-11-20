@@ -34,11 +34,11 @@ jobs:
       # Runs a single command using the runners shell
       - name: docker build AuthServer
         run: |
-          docker build ./AuthenticationService -t youtubeimgurbackend_authserver-0.0.1
+          docker build ./AuthenticationService -t teundeclercq/tdcrepo:youtubeimgurbackend_authserver-0.0.1
 
       - name: docker build ImageServer
         run: |
-          docker build ./ImageService -t youtubeimgurbackend_imageserver-0.0.1
+          docker build ./ImageService -t teundeclercq/tdcrepo:youtubeimgurbackend_imageserver-0.0.1
           
       - name: docker push
         run: |
