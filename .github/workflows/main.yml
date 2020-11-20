@@ -21,17 +21,17 @@ jobs:
       - uses: actions/checkout@v2
       - name: docker login
         run: |
-          docker login docker.pkg.github.com -u teundeclercq -p ${{secrets.GITHUB_TOKEN}}
+          docker login docker.pkg.github.com -u teundeclercq --password-stdin
 
       - name: docker build AuthServer
         run: |
-          docker build ./AuthenticationService -t docker.pkg.github.com/youtubeimgurbackend/authserver:0.0.1 
+          docker build ./AuthenticationService -t docker.pkg.github.com/teundeclercq/youtubeimgurbackend/authserver:0.0.1 
 
       - name: docker build ImageServer
         run: |
-          docker build ./ImageService -t docker.pkg.github.com/youtubeimgurbackend/imageserver:0.0.1
+          docker build ./ImageService -t docker.pkg.github.com/teundeclercq/youtubeimgurbackend/imageserver:0.0.1
           
       - name: docker push
         run: |
-          docker push docker.pkg.github.com/youtubeimgurbackend/authserver:0.0.1
-          docker push docker.pkg.github.com/youtubeimgurbackend/imageserver:0.0.1
+          docker push docker.pkg.github.com/teundeclercq/youtubeimgurbackend/authserver:0.0.1
+          docker push docker.pkg.github.com/teundeclercq/youtubeimgurbackend/imageserver:0.0.1
