@@ -61,7 +61,7 @@ jobs:
         run: |
           docker buildx build \
                                 --platform linux/arm/v7 \
-                                --tag ${{ steps.prepare.outputs.docker_image_authserver }}:${{ steps.prepare.outputs.version }} \
+                                --tag ${{ steps.prepare.outputs.docker_image_imageserver }}:${{ steps.prepare.outputs.version }} \
                                 --file ./ImageService/Dockerfile \
                                 --output "type=image,push=false" .
 
@@ -78,7 +78,7 @@ jobs:
       - name: docker push
         run: |
           docker push ${{ steps.prepare.outputs.docker_image_authserver }}:${{ steps.prepare.outputs.version }}
-          docker push ${{ steps.prepare.outputs.docker_image_authserver }}:${{ steps.prepare.outputs.version }}
+          docker push ${{ steps.prepare.outputs.docker_image_imageserver }}:${{ steps.prepare.outputs.version }}
 
 
 #  deploy:
