@@ -29,13 +29,13 @@ jobs:
 
       - name: Set up Docker Buildx
         uses: crazy-max/ghaction-docker-buildx@v3
-        width:
+        with:
           buildx-version: latest
 
       - name: Prepare
-          if: success()
-          id: prepare
-          run: |
+        if: success()
+        id: prepare
+        run: |
             echo ::set-output name=docker_platform::${DOCKER_TARGET_PLATFORM}
             echo ::set-output name=docker_image_authserver::${DOCKER_REGISTRY}/${DOCKER_USER}/${DOCKER_IMAGE_AUTHSERVER}
             echo ::set-output name=docker_image_imageserver::${DOCKER_REGISTRY}/${DOCKER_USER}/${DOCKER_IMAGE_IMAGESERVER}
@@ -47,8 +47,8 @@ jobs:
 
 
       - name: Run Buildx authserver (push image)
-          if: success()
-          run: |
+        if: success()
+        run: |
             docker buildx build \
             --platform ${{ steps.prepare.outputs.docker_platform }} \
             --tag ${{ steps.prepare.outputs.docker_image_authserver }}:${{ steps.prepare.outputs.version }} \
@@ -56,8 +56,8 @@ jobs:
             --output type=image,push=true .
 
       - name: Run Buildx imageserver (push image)
-          if: success()
-          run: |
+        if: success()
+        run: |
             docker buildx build \
             --platform ${{ steps.prepare.outputs.docker_platform }} \
             --tag ${{ steps.prepare.outputs.docker_image_imageserver }}:${{ steps.prepare.outputs.version }} \
