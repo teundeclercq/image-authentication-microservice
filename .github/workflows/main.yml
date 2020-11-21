@@ -28,10 +28,10 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Set up Docker Buildx
-        uses: crazy-max/ghaction-docker-buildx@v1
+        uses: docker/setup-buildx-action@v1
         id: buildx
         with:
-          version: latest
+          install: true
 
       - name: docker login
         run: |
@@ -40,6 +40,10 @@ jobs:
       - name: Build
         run: |
           docker buildx build ./AuthenticationService --platform linux/arm/v7 --tag docker.pkg.github.com/teundeclercq/youtubeimgurbackend/authserver:0.0.2
+          
+      - name: Push
+        run: |
+          docker push docker.pkg.github.com/teundeclercq/youtubeimgurbackend/authserver:0.0.2
 
 #      - name: Run Buildx authserver (push image)
 #        if: success()
