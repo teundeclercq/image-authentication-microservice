@@ -43,8 +43,8 @@ jobs:
       - name: Build and Push
         uses: docker/build-push-action@v2
         with:
-          context: ./AuthenticationService
-          file: ./Dockerfile
+          context: .
+          file: ./AuthenticationService/Dockerfile
           platforms: linux/arm/v7
           push: true
           tags: |
