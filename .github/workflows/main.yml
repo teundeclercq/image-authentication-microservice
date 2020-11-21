@@ -48,8 +48,8 @@ jobs:
           platforms: linux/arm/v7
           push: true
           tags: |
-            teundeclercq/youtubeimgurbackend:latest
-            teundeclercq/youtubeimgurbackend:0.0.2
+            docker.pkg.github.com/teundeclercq/youtubeimgurbackend/authserver:latest
+            docker.pkg.github.comteundeclercq/youtubeimgurbackend/authserver:0.0.2
             
       - name: Build and Push
         uses: docker/build-push-action@v2
@@ -59,8 +59,8 @@ jobs:
           platforms: linux/arm/v7
           push: true
           tags: |
-            teundeclercq/youtubeimgurbackend_imageservice:latest
-            teundeclercq/youtubeimgurbackend_imageservice:0.0.2
+            docker.pkg.github.com/teundeclercq/youtubeimgurbackend/imageservice:latest
+            docker.pkg.github.com/teundeclercq/youtubeimgurbackend/imageservice:0.0.2
 #         run: |
 #           docker build ./AuthenticationService --push --platform linux/arm/v7 --tag docker.pkg.github.com/teundeclercq/youtubeimgurbackend/authserver:0.0.2
           
