@@ -39,10 +39,7 @@ jobs:
 
       - name: Build
         run: |
-          docker build ./AuthenticationService \
-          --platform linux/arm/v7 \
-          --tag docker.pkg.github.com/teundeclercq/youtubeimgurbackend/authserver:0.0.2 \
-          --push true 
+          docker build ./AuthenticationService --push --platform linux/arm/v7 --tag docker.pkg.github.com/teundeclercq/youtubeimgurbackend/authserver:0.0.2
           
       - name: Push
         run: |
