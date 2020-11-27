@@ -25,12 +25,25 @@ spec:
         - name: authservice-app
           image: ghcr.io/teundeclercq/youtubeimgurbackend/authserver:0.0.2
           imagePullPolicy: Always
+          env:
+            - name: DB_DATABASE
+              value: 'postgresdb'
+            - name: DB_USER
+              value: 'postgresadmin'
+            - name: DB_PASSWORD
+              value: 'admin123'
+            - name: DB_HOST
+              value: '192.168.178.100'
+            - name: DB_PORT
+              value: '31898'
+            - name: TOKEN_SECRET
+              value: 'secrettokenforjwttokens'
           ports:
-            - containerPort: 3000
-          command:
-            - "/bin/sh"
-            - "-c"
-            - "sleep 36000"
+            - containerPort: 3001
+#          command:
+#            - "/bin/sh"
+#            - "-c"
+#            - "sleep 36000"
 #          resources:
 #            requests:
 #              memory: "64Mi"
