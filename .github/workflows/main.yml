@@ -61,6 +61,16 @@ jobs:
           tags: |
             ghcr.io/teundeclercq/youtubeimgurbackend/imageservice:latest
             ghcr.io/teundeclercq/youtubeimgurbackend/imageservice:0.0.2
+
+      - name:
+        uses: actions-hub/kubectl@master
+          env:
+            KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+          with:
+            args: |
+              apply -f ./AuthenticationService/deployments/authservice_deployment.yaml
+              apply -f ./AuthenticationService/deployments/authservice_loadbalancer.yaml
+              apply -f ./AuthenticationService/deployments/authservice_ingress.yaml
 #         run: |
 #           docker build ./AuthenticationService --push --platform linux/arm/v7 --tag docker.pkg.github.com/teundeclercq/youtubeimgurbackend/authserver:0.0.2
           
@@ -96,15 +106,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-          - uses: actions/checkout@v2
-          - uses: actions-hub/kubectl@master
-            env:
-              KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
-            with:
-              args: |
-                apply -f ./AuthenticationService/deployments/authservice_deployment.yaml
-                apply -f ./AuthenticationService/deployments/authservice_loadbalancer.yaml
-                apply -f ./AuthenticationService/deployments/authservice_ingress.yaml
+
 
 
 
