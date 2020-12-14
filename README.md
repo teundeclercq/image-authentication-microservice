@@ -1,50 +1,81 @@
-# YoutubeImgurBackend
+# 🌟 Image Authentication Microservices 🌟
 
-This project is build because I wanted to learn more about Kubernetes and how the services work
+This project is build because I wanted to learn more about Kubernetes and how the services work.
 I also wanted to learn more about Microservices. 
 For future references I can use this project to go further into communicating components.
 Like rabbitMQ.
 
 ---
 
-## Creating the microservices
+## Creating the microservices 💭
 
-I created an Authentication service which uses a JSON Token to authenticate other services.
-Then I created an ImageService. This is for storing images. The ImagesService needs an Authentication token of the AuthenticationService.
-This is send via the FrontEnd. I Tested this with Postman. 
+First I created an authentication service. Here you can do the following:
 
-Here are the results:
+* Register a user.
+<br/>
 
-* todo Add Images of postman testing.
----
+    [postman_image_register]
+* Login a user.
+<br/>
 
-## Creating the database
+    [postman_image_login]
+
+When you log in with a registered user, you get a JSON token for authentication with other services.
+The image service uses this JSON token to authenticate if the user can see the image.
+<br><br/>
+
+    [postman_image_get/store_image]
+
+
+## Creating the database 🔐
 
 First I created the database to store the images. I wanted to create the database and service inside my Kubernetes Cluster.
 I connected a SSD drive to the cluster for storage purpose, and I used this guide to know how to store items on it.
-Then I created the configmap. This is where I stored the password, username and the database-name.   
+Then I created the configmap. This is where I stored the password, username and the database-name. Location of 🔗[database YAML files][locationRepoDatabaseDeployment].
 
-* Connected SSD to the server. Used this guide to figure out how to connect to it and where it is stored.
-* Created configmap - for storing user data for connecting to the database.
-* Created the storage - This part is most important because this is where I specify where to store the files. ![hostImagePath]()
-* Created the deployment -  This is the pod. When something goes wrong with the database this is the thing that replicates and restarts the services. 
-* Created the service - This is for exposing the pod. This is, so I can connect an outside service to it like the database local on my laptop.
+1. Connected SSD to the server. Used this 🔗[guide][websiteAddingSSDRaspberryPI] to figure out how to connect to it and where it is stored.
+2. Created configmap - for storing user data for connecting to the database. Here I used documentation from 🔗[Rancher][websiteCreatingVolumeK3s].
+3. Created the storage - This part is most important because this is where I specify where to store the files. ![hostImagePath][imageStorageLocationDatabase] 
+4. Created the deployment -  This is the pod. When something goes wrong with the database this is the thing that replicates and restarts the services. 
+5. Created the service - This is for exposing the pod. This is, so I can connect an outside service to it like the database local on my laptop.
 
----
+## Creating the deployments ⚡
 
-## Creating the deployments
+For deploying I created a dockerfile for each microservice. This is used for creating images. 
+The images I can use on any platform I want as long as I deploy with Docker buildx.
+Buildx is an experimental feature of Docker. I used the following actions:
 
-First I created the Dockerfile. I am deploying to an arm based cluster. This is the architecture of the Chip.
-After this I started with deploying the dockerfile to github container storage. I did this with the main.yml file.
-I created secrets for logging in Github Container Registry. Then I used an action to build and push to image to GHC.io
-In the map deployments inside the services maps, I created the deployment, ingress, service.
+* ✅ Action for [check out][actionCheckOut]
+* ✅ Docker action for [QMU][actionDockerSetupQmu]
+* ✅ Docker action for [buildx][actionDockerSetupBuildx]
+* ✅ Docker action for [login][actionDockerLogin]
+* ✅ Docker action for [build and push][actionDockerBuildPush]
+* ✅ Action for pushing files to a [local kubernetes cluster][actionPushToKubernetes] 
 
-* 
+Location for deployment files:
 
----
+* 🔗[authentication service][locationRepoAuthenticationDeployments]
+* 🔗[image service][locationRepoImageDeployments]
 
-## Testing the deployments
+## Testing the deployments 🏁
 
 * todo Locust testing
 
 
+
+
+[imageSecrets]:https://user-images.githubusercontent.com/42863867/101778710-830c8880-3af4-11eb-88ff-65b8df4f2974.png
+[websiteAddingSSDRaspberryPI]:https://www.raspberrypi.org/documentation/configuration/external-storage.md
+[websiteCreatingVolumeK3s]:https://rancher.com/docs/k3s/latest/en/storage/
+[imageStorageLocationDatabase]:https://user-images.githubusercontent.com/42863867/102088815-b9f7dc80-3e1b-11eb-9c74-cd89240ddc1b.png
+
+[actionCheckOut]:https://github.com/actions/checkout
+[actionDockerSetupQmu]: https://github.com/docker/setup-qemu-action
+[actionDockerSetupBuildx]: https://github.com/docker/setup-buildx-action
+[actionDockerLogin]: https://github.com/docker/login-action
+[actionDockerBuildPush]: https://github.com/docker/build-push-action
+[actionPushToKubernetes]: https://github.com/steebchen/kubectl
+
+[locationRepoDatabaseDeployment]: https://github.com/teundeclercq/image-authentication-microservice/tree/main/PostgresqlDeployment
+[locationRepoAuthenticationDeployments]: https://github.com/teundeclercq/image-authentication-microservice/tree/main/AuthenticationService/deployments
+[locationRepoImageDeployments]:https://github.com/teundeclercq/image-authentication-microservice/tree/main/ImageService/deployments
