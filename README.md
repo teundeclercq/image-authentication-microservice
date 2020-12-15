@@ -20,12 +20,9 @@ First I created an authentication service. Here you can do the following:
 ![postman_image_login][imagePostmanApiLoginUser]
 
 When you log in with a registered user, you get a JSON token for authentication with other services.
-The image service uses this JSON token to authenticate if the user can see the image.
-<br><br/>
+The image service uses this JSON token to authenticate if the user can use this service.
 
-    [postman_image_get/store_image]
-
-
+![postman_image][imagePostmanApiPOSTimage]
 ## Creating the database 🔐
 
 First I created the database to store the images. I wanted to create the database and service inside my Kubernetes Cluster.
@@ -81,3 +78,4 @@ Location for deployment files:
 
 [imagePostmanApiRegisterUser]:https://user-images.githubusercontent.com/42863867/102227037-65bb2e00-3ee9-11eb-8959-9f9ded502685.png
 [imagePostmanApiLoginUser]:https://user-images.githubusercontent.com/42863867/102234031-285a9e80-3ef1-11eb-930f-9763cb211b23.png
+[imagePostmanApiPOSTimage]:https://user-images.githubusercontent.com/42863867/102235770-f9452c80-3ef2-11eb-8257-a9ed85a7eb63.png
