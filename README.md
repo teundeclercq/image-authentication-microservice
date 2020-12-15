@@ -16,8 +16,6 @@ First I created an authentication service. Here you can do the following:
 ![postman_image_register][imagePostmanApiRegisterUser]
     
 * Login a user.
-<br/>
-
     [postman_image_login]
 
 When you log in with a registered user, you get a JSON token for authentication with other services.
