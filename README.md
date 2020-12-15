@@ -12,9 +12,9 @@ Like rabbitMQ.
 First I created an authentication service. Here you can do the following:
 
 * Register a user.
-<br/>
 
-    [postman_image_register]
+    ![postman_image_register][imagePostmanApiRegisterUser]
+    
 * Login a user.
 <br/>
 
@@ -79,3 +79,5 @@ Location for deployment files:
 [locationRepoDatabaseDeployment]: https://github.com/teundeclercq/image-authentication-microservice/tree/main/PostgresqlDeployment
 [locationRepoAuthenticationDeployments]: https://github.com/teundeclercq/image-authentication-microservice/tree/main/AuthenticationService/deployments
 [locationRepoImageDeployments]:https://github.com/teundeclercq/image-authentication-microservice/tree/main/ImageService/deployments
+
+[imagePostmanApiRegisterUser]:https://user-images.githubusercontent.com/42863867/102227037-65bb2e00-3ee9-11eb-8959-9f9ded502685.png
