@@ -16,7 +16,8 @@ First I created an authentication service. Here you can do the following:
 ![postman_image_register][imagePostmanApiRegisterUser]
     
 * Login a user.
-    [postman_image_login]
+
+![postman_image_login][imagePostmanApiLoginUser]
 
 When you log in with a registered user, you get a JSON token for authentication with other services.
 The image service uses this JSON token to authenticate if the user can see the image.
@@ -79,3 +80,4 @@ Location for deployment files:
 [locationRepoImageDeployments]:https://github.com/teundeclercq/image-authentication-microservice/tree/main/ImageService/deployments
 
 [imagePostmanApiRegisterUser]:https://user-images.githubusercontent.com/42863867/102227037-65bb2e00-3ee9-11eb-8959-9f9ded502685.png
+[imagePostmanApiLoginUser]:https://user-images.githubusercontent.com/42863867/102234031-285a9e80-3ef1-11eb-930f-9763cb211b23.png
