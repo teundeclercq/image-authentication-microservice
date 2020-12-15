@@ -13,7 +13,7 @@ First I created an authentication service. Here you can do the following:
 
 * Register a user.
 
-    ![postman_image_register][imagePostmanApiRegisterUser]
+![postman_image_register][imagePostmanApiRegisterUser]
     
 * Login a user.
 <br/>
