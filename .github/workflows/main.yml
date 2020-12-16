@@ -66,7 +66,7 @@ jobs:
       - name: Deploy to local raspberry pi cluster
         uses: steebchen/kubectl@v1.0.0
         env:
-            KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+            KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG }}
         with:
           args: |
             apply -f ./AuthenticationService/deployments/authservice_deployment.yaml
