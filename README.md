@@ -55,7 +55,23 @@ Location for deployment files:
 
 ## Testing the deployments 🏁
 
-* todo Locust testing
+For load testing I started with a replicaset of 2 pods for the authentication service. I tested this with the following configuration.
+
+![loadUsers][imageLocustLoad]
+
+which saw the following results:
+
+![imageSchema2Replica][imageLocust2Replicas]
+
+Here you can see that I get 55 Requests per second. This is with running 100 users and each sending 10 requests per second.
+After this  I tryed to scale up. I scaled up to a replicaset of 10.
+
+![imageReplicaKubernetes][imageKubernetes10Replicas]
+
+The result I got where the following
+
+![locustResult10Replica][imageLocust10Replicas]
+
 
 
 
