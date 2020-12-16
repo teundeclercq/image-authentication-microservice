@@ -79,3 +79,9 @@ Location for deployment files:
 [imagePostmanApiRegisterUser]:https://user-images.githubusercontent.com/42863867/102227037-65bb2e00-3ee9-11eb-8959-9f9ded502685.png
 [imagePostmanApiLoginUser]:https://user-images.githubusercontent.com/42863867/102234031-285a9e80-3ef1-11eb-930f-9763cb211b23.png
 [imagePostmanApiPOSTimage]:https://user-images.githubusercontent.com/42863867/102235770-f9452c80-3ef2-11eb-8257-a9ed85a7eb63.png
+
+[imageLocustLoad]:https://user-images.githubusercontent.com/42863867/102395216-1e14cf00-3fdb-11eb-80f0-28e3a19a5841.png
+[image2Replicas]:https://user-images.githubusercontent.com/42863867/102395259-2a009100-3fdb-11eb-987d-6ec130ef4dcf.png
+[imageLocust2Replicas]:https://user-images.githubusercontent.com/42863867/102395329-44d30580-3fdb-11eb-854a-9512f89e0eba.png
+[imageLocust10Replicas]:https://user-images.githubusercontent.com/42863867/102395409-5fa57a00-3fdb-11eb-9d6c-83c43a15e1bc.png
+[imageKubernetes10Replicas]:https://user-images.githubusercontent.com/42863867/102395438-6af8a580-3fdb-11eb-8d1b-7ee5ea128e2f.png
