@@ -10,7 +10,7 @@ spec:
   selector:
     matchLabels:
       app: authservice-app
-  replicas: 2
+  replicas: 10
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: authservice-app
-          image: ghcr.io/teundeclercq/youtubeimgurbackend/authserver:0.0.2
+          image: ghcr.io/teundeclercq/youtubeimgurbackend/authserver:0.0.3
           imagePullPolicy: Always
           env:
             - name: DB_DATABASE
