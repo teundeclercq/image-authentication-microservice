@@ -71,7 +71,7 @@ jobs:
           args: |
             kubectl apply -f ./AuthenticationService/deployments/authservice_deployment.yaml
             kubectl apply -f ./AuthenticationService/deployments/authservice_loadbalancer.yaml
-            kubectl apply -f ./AuthenticationService/deployments/authservice_ingress.yaml    
+            kubectl apply -f ./AuthenticationService/deployments/authservice_ingres.yaml    
 #         run: |
 #           docker build ./AuthenticationService --push --platform linux/arm/v7 --tag docker.pkg.github.com/teundeclercq/youtubeimgurbackend/authserver:0.0.2
           
