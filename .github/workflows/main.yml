@@ -27,29 +27,29 @@ jobs:
       - name: Checkout the code
         uses: actions/checkout@v2
 
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v1
+      # - name: Set up QEMU
+      #   uses: docker/setup-qemu-action@v1
         
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
+      # - name: Set up Docker Buildx
+      #   uses: docker/setup-buildx-action@v1
 
-      - name: docker login
-        uses: docker/login-action@v1
-        with:
-          registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.CR_PAT }}
+      # - name: docker login
+      #   uses: docker/login-action@v1
+      #   with:
+      #     registry: ghcr.io
+      #     username: ${{ github.repository_owner }}
+      #     password: ${{ secrets.CR_PAT }}
 
-      - name: Build and Push
-        uses: docker/build-push-action@v2
-        with:
-          context: ./AuthenticationService
-          file: ./AuthenticationService/Dockerfile
-          platforms: linux/arm/v7,linux/amd64
-          push: true
-          tags: |
-            ghcr.io/teundeclercq/youtubeimgurbackend/authserver:latest
-            ghcr.io/teundeclercq/youtubeimgurbackend/authserver:0.0.3
+      # - name: Build and Push
+      #   uses: docker/build-push-action@v2
+      #   with:
+      #     context: ./AuthenticationService
+      #     file: ./AuthenticationService/Dockerfile
+      #     platforms: linux/arm/v7,linux/amd64
+      #     push: true
+      #     tags: |
+      #       ghcr.io/teundeclercq/youtubeimgurbackend/authserver:latest
+      #       ghcr.io/teundeclercq/youtubeimgurbackend/authserver:0.0.3
             
 #       - name: Build and Push
 #         uses: docker/build-push-action@v2
@@ -63,15 +63,20 @@ jobs:
 #             ghcr.io/teundeclercq/youtubeimgurbackend/imageservice:0.0.2
 
 
-      - name: Kubernetes CLI - kubectl
+      - name: Deploy to local raspberry pi cluster
         uses: steebchen/kubectl@v1.0.0
         env:
             KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
         with:
           args: |
-            kubectl apply -f ./AuthenticationService/deployments/authservice_deployment.yaml
-            kubectl apply -f ./AuthenticationService/deployments/authservice_loadbalancer.yaml
-            kubectl apply -f ./AuthenticationService/deployments/authservice_ingres.yaml    
+            apply -f ./AuthenticationService/deployments/authservice_deployment.yaml
+      - name: Verify deployment
+        uses: steebchen/kubectl@v1.0.0
+        env:
+            KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+        with:
+          args: '"rollout status deployment/authservice-deploy"'
+
 #         run: |
 #           docker build ./AuthenticationService --push --platform linux/arm/v7 --tag docker.pkg.github.com/teundeclercq/youtubeimgurbackend/authserver:0.0.2
           
