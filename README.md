@@ -55,7 +55,10 @@ Location for deployment files:
 
 ## Testing the deployments 🏁
 
-For load testing I started with a replicaset of 2 pods for the authentication service. I tested this with the following configuration.
+For testing an application capability's on a kubernetes cluster I searched the internet for 'How to load test an application in a kubernetes cluster.'
+This is when I found [locust](https://locust.io/). This framework can be used to load test and simulate Users. 
+
+For the first test I started with a replicaset of 2 pods, 100 users at a spawn rate of 10.
 
 ![loadUsers][imageLocustLoad]
 
@@ -63,15 +66,16 @@ which saw the following results:
 
 ![imageSchema2Replica][imageLocust2Replicas]
 
-Here you can see that I get 55 Requests per second. This is with running 100 users and each sending 10 requests per second.
-After this  I tryed to scale up. I scaled up to a replicaset of 10.
+Here you can see that I get 55 Requests per second.
+After this  I tried to scale up. I scaled up to a replicaset of 10.
 
 ![imageReplicaKubernetes][imageKubernetes10Replicas]
 
-The result I got where the following
+The result I got where the following.
 
 ![locustResult10Replica][imageLocust10Replicas]
 
+With more replicasets I get more requests per second. The median response time also goes down, from 1700 to 900 ms.
 
 
 
