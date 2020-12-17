@@ -76,7 +76,7 @@ The result I got where the following.
 ![locustResult10Replica][imageLocust10Replicas]
 
 With more replicasets I get more requests per second. The median response time also goes down, from 1700 to 900 ms.
-
+Hence I get more throughput when I use a bigger replicaset with the same amount of users, eventhough I make use of one loadbalancer.
 
 
 
